@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from './services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'proy_app_web';
+
+  userName: string | null = null;
+
+  constructor(private loginService:LoginService,private router:Router) { 
+    this.userName = this.loginService.getUser();
+  }
+
+  cerrarseion(){
+    console.log("cerrarseion")
+
+    this.loginService.logOut()
+      this.router.navigate(['/login']);
+  }
+
+  
 }

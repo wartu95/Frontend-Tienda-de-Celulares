@@ -1,6 +1,5 @@
 export class Login {
-    email?:string;
-    username?:string;
+    name?:string;
     password?:string;
     roles?:string[];
   }

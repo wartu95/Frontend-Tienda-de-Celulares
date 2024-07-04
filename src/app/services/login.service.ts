@@ -24,7 +24,7 @@ export class LoginService {
   });
 
 
-     const body = JSON.stringify({ username: username, password: password });
+     const body = JSON.stringify({ name: username, password: password });
 
     return this.http.post<any>("http://localhost:8080/login", body, { headers });
 
@@ -70,7 +70,7 @@ saveUser(accessToken:string):void{
 
   let payload=this.getTokenData(accessToken);
   this._user=new Login();
-  this._user.username=payload.sub;
+  this._user.name=payload.sub;
   this._user.roles=payload.roles;
 
   sessionStorage.setItem('usuario',JSON.stringify(this._user));
@@ -118,4 +118,7 @@ logOut():void{
   sessionStorage.removeItem('token');
 }
 
+public getUser(): string | null{
+  return this.login ? this.login.name : null
+}
 }

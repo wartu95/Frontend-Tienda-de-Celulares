@@ -1,0 +1,45 @@
+<header class="bg-primary text-center text-white p-3">
+    <h1>Listado de Clientes</h1>
+</header>
+
+<nav class="container p-3">
+    <a th:href="@{/cliente/new}" class="btn btn-success">Nuevo</a>
+    <a th:href="@{/cliente/exportarPDF}" class="btn btn-secondary">Exportar a PDF</a>
+    <a th:href="@{/cliente/exportarExcel}" class="btn btn-success">Exportar a Excel</a>
+</nav>
+
+<main class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombres</th>
+
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Email</th>
+            <th>Acciones</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cli of clientesAPI">
+            <td >{{cli.customerId}}</td>
+            <td >{{cli.name}}</td>
+
+            <td >{{cli.phone}}</td>
+            <td >{{cli.address}}</td>
+            
+            <td >{{cli.email}}</td>            
+            <td>
+                <a th:href="@{/cliente/editar/}+${persona.customerId}" class="btn btn-warning">Editar</a>
+                <a th:href="@{/cliente/eliminar/}+${persona.customerId}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer class="bg-dark text-end text-white p-3">
+    <h3>Redes Sociales</h3>
+</footer>

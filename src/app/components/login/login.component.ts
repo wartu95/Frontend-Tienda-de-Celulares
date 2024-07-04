@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     // console.log(this.loginData);
 
 
-    this.loginService.login(this.loginData.username,this.loginData.password).subscribe({
+    this.loginService.login(this.loginData.name,this.loginData.password).subscribe({
       next:(response)=>{
 
         this.router.navigate(['/test']);

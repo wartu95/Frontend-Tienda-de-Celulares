@@ -1,2 +1,100 @@
-<p>test works!</p>
-<button (click)="testRole()">probando autorización</button>
+
+   <!-- Start Banner Hero -->
+   <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+        <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src=".\assets\img\ticketdeatencion.png" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left align-self-center">
+                            <h1 class="h1 text-success"><b>Ticket de Atencion</b></h1>
+                            <p>
+                                Registra los problemas técnicos reportados por los clientes y verifica si sus equipos móviles están cubiertos por la garantía. Proporciona un canal eficiente para gestionar y dar seguimiento a las solicitudes de soporte.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src=".\assets\img\solicitud.png" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1 text-success"><b>Solicitud de cambio</b></h1>
+                            <p>
+                                Facilita el proceso de registro y seguimiento de las solicitudes de cambio de equipo de los clientes. Mantén un registro centralizado de las solicitudes y agiliza la comunicación con el cliente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src=".\assets\img\tecnica-evaluacion.png" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1 text-success"><b>Evaluacion de Equipo</b></h1>
+                            
+                            <p>
+                                Permite a los técnicos registrar los resultados de las evaluaciones de los equipos móviles para determinar si las fallas son de fábrica. Documenta el proceso de diagnóstico y facilita la toma de decisiones informadas sobre la garantía y el cambio de equipo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+        <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
+<!-- End Banner Hero -->
+
+
+<!-- Start Categories of The Month -->
+<section class="container py-5">
+    <div class="row text-center pt-3">
+        <div class="col-lg-6 m-auto">
+            <h1 class="h1">Portal de Atencion</h1>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 p-5 mt-3">
+           <img src=".\assets\img\ticket-atencion.png" class="rounded-circle img-fluid border">
+            <h5 class="text-center mt-3 mb-3">Ticket</h5>
+            <p class="text-center"><a routerLink="/ticket" class="btn btn-success">Registrar Ticket</a></p>
+        </div>
+        <div class="col-12 col-md-4 p-5 mt-3">
+            <img src=".\assets\img\Solicitud-cambio.png" class="rounded-circle img-fluid border">
+            <h2 class="h5 text-center mt-3 mb-3">Solicitud de cambio</h2>
+            <p class="text-center"><a class="btn btn-success">Ingresar solicitud</a></p>
+        </div>
+        <div class="col-12 col-md-4 p-5 mt-3">
+            <img src=".\assets\img\evaluacion-equipo.png" class="rounded-circle img-fluid border">
+            <h2 class="h5 text-center mt-3 mb-3">Evaluacion de Equipo</h2>
+            <p class="text-center"><a class="btn btn-success">Evaluar</a></p>
+        </div>
+    </div>
+</section>
+<!-- End Categories  -->
+

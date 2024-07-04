@@ -1,0 +1,41 @@
+<header class="bg-primary text-center text-white p-3">
+    <h1>Listado de Productos</h1>
+</header>
+
+<nav class="container p-4 d-flex justify-content-between align-items-center">
+    <a href="@{/producto/new}" class="btn btn-success">Nuevo</a>
+    <a href="@{/producto/exportarPDF}" class="btn btn-secondary">Exportar a PDF</a>
+    <a href="@{/producto/exportarExcel}" class="btn btn-success">Exportar a Excel</a>
+</nav>
+
+<main class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Imei</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Precio</th>
+            <!-- <th>Estado</th> -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pro of productosAPI">
+            <td> {{pro.imei}}</td>
+            <td>  {{pro.brand}}</td>
+            <td>  {{pro.model}}</td>
+            <td > {{pro.price}}</td>
+            <!-- <td > {{pro.state_product_id}}</td> -->
+
+            <td>
+                <div style="display: flex; gap: 10px;">
+                <a href="@{/producto/editar/}+${persona.productId}" class="btn btn-warning">Editar</a> 
+                <a href="@{/producto/eliminar/}+${persona.productId}" class="btn btn-danger">Eliminar</a>
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+

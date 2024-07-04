@@ -1,29 +1,50 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          Inicio de sesión
-        </div>
-        <div class="card-body">
-          <form (ngSubmit)="login()">
+<section class="vh-100" >
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="./assets/img/Tienda-logo.png"
+        class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form (ngSubmit)="login()">
+          <div class="d-flex flex-row align-items-center justify-content-center ">
+            <H1 style="color: rgb(8, 146, 211);">Login</H1>
+            
+          </div>
 
-            <div class="mb-3">
-              <label for="username" class="form-label">Usuario</label>
-              <input type="text" class="form-control" id="username" [(ngModel)]="loginData.username" name="username" placeholder="Ingresa tu usuario">
+          <div class="divider d-flex align-items-center my-4">
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4">
+            <input type="text" id="name" class="form-control form-control-lg" [(ngModel)]="loginData.name" name="name" placeholder="Ingresa tu nombre de usuario"/>
+            <label class="form-label" for=""></label>
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-3">
+            <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="loginData.password" name="password" placeholder="Ingresa tu contraseña" />
+            <label class="form-label" for=""></label>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+              <label class="form-check-label" for="form2Example3">
+                Recuerdame
+              </label>
             </div>
+            <a href="#!" class="text-body">Olvidaste tu Contraseña?</a>
+          </div>
 
+          <div class="text-center text-lg-start mt-6 pt-2">
+            <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="loading">Iniciar Sesion</button>
+            
+          </div>
 
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password" [(ngModel)]="loginData.password" name="password" placeholder="Ingresa tu contraseña">
-            </div>
-
-
-            <button type="submit" class="btn btn-primary" [disabled]="loading">Iniciar sesión</button>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
+  
+</section>
