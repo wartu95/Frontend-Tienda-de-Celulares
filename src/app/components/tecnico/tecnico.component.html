@@ -1,122 +1,202 @@
-<div class="container mb-5 text-center" style="margin-top: 60px;"><h1 style="font-size: 60px; font-family: lucida sans; color: rgb(42, 90, 181);">Evaluaciones de Equipos</h1></div>
-<div class="  container  text-center ">
-<button class=" btn btn-primary btn-lg " (click)="ocultarFormulario()" (click)="cancelarRechazo()">Ingresar nueva evaluacion </button>
-</div>
-<br><br><br>
-<div *ngIf="mostrarFormulario">
-<section class="intro" style="margin-bottom: 100px;">
-    <div class="mask d-flex align-items-center h-100">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-6">
-            <div class="card" style="border-radius: 1rem;">
-              <div class="card-body p-4">
-                <!-- <h1 class="mb-5 text-center" style="color: rgb(30, 92, 207); font-family: lucida sans;">Evaluacion de Equipo</h1> -->
-                <form >
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="form-outline">
-                        <label class="form-label" for="imei" style="font-size: 15px; font-family: lucida sans;"><strong>IMEI</strong></label>
-                        <input type="text" class="form-control" [formControl]="imeiControl" placeholder="Ingrese el imei para evaluacion"/>
+<div (click)="ocultarmensaje()">
+  <section class="intro">
+    <div class="container mb-5 text-center" style="margin-top: 60px">
+      <h1
+        style="
+          font-size: 60px;
+          font-family: lucida sans;
+          color: rgb(42, 90, 181);
+        "
+      >
+        Evaluaciones de Equipos
+      </h1>
+    </div>
+    <div class="container text-center">
+      <button class="btn btn-primary btn-lg" (click)="nuevaevaluacion()">
+        Ingresar nueva evaluacion
+      </button>
+    </div>
+  </section>
+  <br /><br /><br />
+  <div>
+    <section class="intro" style="margin-bottom: 50px">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container" *ngIf="mostrarFormulario">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+              <div class="card" style="border-radius: 1rem">
+                <div class="card-body p-4">
+                  <form>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-outline">
+                          <label
+                            class="form-label"
+                            for="imei"
+                            style="font-size: 15px; font-family: lucida sans"
+                            ><strong>IMEI</strong></label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            [formControl]="imeiControl"
+                            placeholder="Ingrese el imei para evaluacion"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-1"></div>
+                      <div class="col-5">
+                        <br />
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-rounded btn-block"
+                          (click)="evaluarEquipo()"
+                          style="margin-right: 15px"
+                        >
+                          Evaluar
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-danger btn-rounded btn-block"
+                          (click)="ocultarFormulario()"
+                        >
+                          Cancelar
+                        </button>
                       </div>
                     </div>
-                    <div class="col-1"></div>
-                    <div class="col-5" >
-                        <br>
-                        <button type="submit" class="btn btn-primary btn-rounded btn-block" (click)="evaluarEquipo()" style="margin-right: 15px;">Evaluar</button> 
-                        <button type="submit" class="btn btn-danger btn-rounded btn-block" (click)="ocultarFormulario()">Cancelar</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
-</div>
-<br><br>
-<div *ngIf="mostrarFormularioRechazo">
-    <section class="intro" style="margin-bottom: 100px;">
-        <div class="mask d-flex align-items-center h-100">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-12 col-lg-6">
-                <div class="card" style="border-radius: 1rem;">
-                  <div class="card-body p-4">
-                    <h1 class="mb-5 text-center" style="font-family: lucida sans; color: rgb(156, 6, 6);" >Justificacion de Rechazo</h1>
-                    <form >
-                        <div class="form-floating">
-                            <textarea class="form-control" [(ngModel)]="comentarioRechazo" name="comentarioRechazo"></textarea>
-                            <label for="floatingTextarea">Comentario</label>
-                          </div>
-                          <br>
-                      <div class="row" >
-                        <div class="col-8">
-                        <button type="submit" class="btn btn-primary btn-rounded btn-block" (click)="rechazarSolicitud()">Confirmar Rechazo</button>
-                        <button type="submit" class="btn btn-danger btn-rounded btn-block" style="margin-left: 15px;" (click)="cancelarRechazo()">Cancelar</button>
-                        </div>
-                    </div>
-                    </form>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </section>
-    </div>
-<br><br>
-
-<div *ngIf="solicitud">
-<section class="intro">
-    <div class="mask d-flex align-items-center h-100">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12">
-            <div class="table-responsive bg-white" data-mdb-perfect-scrollbar="true" style="position: relative; height: 445px;">
-                
-              <table class="table">
-                  <thead>
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Estado de solicitud</th>
-                        <th scope="col">N° de Ticket</th>
-                        <th scope="col">Fecha de creacion</th>
-                        <th scope="col">Fecha de actualizacion</th>
-                        <th scope="col">Fecha de ticket</th>
-                        <th scope="col">Imei en Revision</th>
-                        <th scope="col">Comentario</th>
-                        <th scope="col" class="text-center">Accion</th>
-                      </tr>
-                    </thead>
-                <tbody>
-                      <tr >
-                        <td>{{solicitud.id}}</td>
-                        <td>{{solicitud.state}}</td>
-                        <td>{{solicitud.ticket}}</td>
-                        <td>{{solicitud.createdDate}}</td>
-                        <td>{{solicitud.updateDate}}</td>
-                        <td>{{solicitud.ticketDate}}</td>
-                        <td>{{solicitud.imeiInRevision}}</td>
-                        <td>{{solicitud.comment}}</td> 
-                        <div>
-                        <td><button class="btn btn-outline-warning" (click)="aprobarSolicitud()" [disabled]="!botonesHabilitados">Aprobar</button>
-                            <button class="btn btn-outline-danger" (click)="mostrarFormularioRechazo=true" [disabled]="!botonesHabilitados">Rechazar</button>
-                        </td>
-                        </div>  
-                        <br>
-                      </tr>
-                </tbody>
-              </table>
+  </div>
+  <br />
+  <div
+    *ngIf="mensaje"
+    class="alerta"
+    [ngClass]="{ 'alerta-exito': mensajeExito, 'alerta-error': mensajeError }"
+  >
+    {{ mensaje }}
+  </div>
+  <div *ngIf="mostrarFormularioRechazo">
+    <section class="intro" style="margin-bottom: 100px">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+              <div class="card" style="border-radius: 1rem">
+                <div class="card-body p-4">
+                  <h1
+                    class="mb-5 text-center"
+                    style="font-family: lucida sans; color: rgb(156, 6, 6)"
+                  >
+                    Justificacion de Rechazo
+                  </h1>
+                  <form>
+                    <div class="form-floating">
+                      <textarea
+                        class="form-control"
+                        [(ngModel)]="comentarioRechazo"
+                        name="comentarioRechazo"
+                      ></textarea>
+                      <label for="floatingTextarea">Comentario</label>
+                    </div>
+                    <br />
+                    <div class="row">
+                      <div class="col-8">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-rounded btn-block"
+                          (click)="rechazarSolicitud()"
+                        >
+                          Confirmar Rechazo
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-danger btn-rounded btn-block"
+                          style="margin-left: 15px"
+                          (click)="cancelarRechazo()"
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-</section>
-<br><br>
+    </section>
+  </div>
+  <br />
+  <div *ngIf="solicitud">
+    <section class="intro">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div
+                class="table-responsive bg-white"
+                data-mdb-perfect-scrollbar="true"
+                style="position: relative; height: 445px"
+              >
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Estado de solicitud</th>
+                      <th scope="col">N° de Ticket</th>
+                      <th scope="col">Fecha de creacion</th>
+                      <th scope="col">Fecha de actualizacion</th>
+                      <th scope="col">Fecha de ticket</th>
+                      <th scope="col">Imei en Revision</th>
+                      <th scope="col">Comentario</th>
+                      <th scope="col" class="text-center">Accion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ solicitud.id }}</td>
+                      <td>{{ solicitud.state }}</td>
+                      <td>{{ solicitud.ticket }}</td>
+                      <td>{{ solicitud.createdDate }}</td>
+                      <td>{{ solicitud.updateDate }}</td>
+                      <td>{{ solicitud.ticketDate }}</td>
+                      <td>{{ solicitud.imeiInRevision }}</td>
+                      <td>{{ solicitud.comment }}</td>
+                      <div>
+                        <td>
+                          <button
+                            class="btn btn-outline-warning"
+                            (click)="aprobarSolicitud()"
+                            [disabled]="!botonesHabilitados"
+                          >
+                            Aprobar
+                          </button>
+                          <button
+                            class="btn btn-outline-danger"
+                            (click)="mostrarFormularioRechazo = true"
+                            [disabled]="!botonesHabilitados"
+                          >
+                            Rechazar
+                          </button>
+                        </td>
+                      </div>
+                      <br />
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br /><br />
+  </div>
 </div>
-
-
