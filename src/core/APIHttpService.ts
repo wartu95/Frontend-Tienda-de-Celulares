@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { GTicket, Producto } from "../models/Models";
+import {  GTicket, Producto, Solicitud } from "../models/Models";
 
 
 
@@ -24,7 +24,21 @@ export class APIHttpService {
         return this.http.post('http://localhost:8080/api/v1/documento-cambio/registrar-ticket-doc-cambio',gticket)
     }
 
+    evaluarEquipo(imei: string){
+        return this.http.put('http://localhost:8080/api/v1/documento-cambio/actualizar-revision',{imei})
+    }
 
+    getSolicitudPorImei(imei: string): Observable<Solicitud>{
+        const params = new HttpParams().set('imei',imei);
+        return this.http.get<Solicitud>(`http://localhost:8080/api/v1/documento-cambio/doc-cambio-tikcet-imei`, {params});
+    }
 
+    aprobarSolicitud(imei: string){
+        return this.http.put('http://localhost:8080/api/v1/documento-cambio/actualizar-aprobado', {imei});
+    }
+
+    rechazarSolicitud(imei: string, comment:string){
+        return this.http.put('http://localhost:8080/api/v1/documento-cambio/actualizar-rechazado',{imei, comment})
+    }
 
 }

@@ -7,6 +7,7 @@ import { authGuard } from './guards/auth.guard';
 import { ProductoComponent } from './components/producto/producto.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { TecnicoComponent } from './components/tecnico/tecnico.component';
 
 
 export const routes: Routes = [
@@ -15,7 +16,8 @@ export const routes: Routes = [
 {path:'test',component:TestComponent,canActivate:[authGuard,roleGuard],data:{role:['ROLE_SALE','ROLE_TECH']}},
 {path:'producto',component:ProductoComponent,canActivate:[authGuard,roleGuard],data:{role:['ROLE_SALE']}},
 {path:'cliente',component:ClienteComponent,canActivate:[authGuard,roleGuard],data:{role:['ROLE_SALE','ROLE_SALE']}},
-{path:'ticket',component:TicketComponent,canActivate:[authGuard,roleGuard],data:{role:['ROLE_SALE']}}
+{path:'ticket',component:TicketComponent,canActivate:[authGuard,roleGuard],data:{role:['ROLE_SALE']}},
+{path:'tecnico',component:TecnicoComponent,canActivate:[authGuard,roleGuard],data:{role:['ROLE_TECH']}}
 ];
 
 @NgModule({

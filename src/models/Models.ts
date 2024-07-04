@@ -56,8 +56,42 @@ export class GTicket{
     imei: string = "";
     comment: string = "";
 
-
     constructor(imei:string = "", comment: string = ""){
         this.imei = imei;
         this.comment = comment;
     }}
+
+    // export class GSolicitud{
+    //     imei: string = "";
+    //     comment: string = "";
+    
+    //     constructor(imei:string = "", comment: string = ""){
+    //         this.imei = imei;
+    //         this.comment = comment;}
+    // }
+
+
+    export class Solicitud{
+    id:string="";
+    state: string="";
+    ticket: string="";
+    createdDate: string="";
+    updateDate: string="";
+    ticketDate: string="";
+    imeiInRevision: string="";
+    comment: string="";
+
+
+        constructor(id:string="", state: string="", ticket: string="",          createdDate: string="", updateDate: string="", ticketDate: string="",
+            imeiInRevision: string="", comment: string=""){
+                this.id = id;
+                this.state = state;
+                this.ticket = ticket;
+                this.createdDate = createdDate;
+                this.updateDate = updateDate;
+                this.ticketDate = ticketDate;
+                this.imeiInRevision = imeiInRevision;
+                this.comment = comment;
+            
+        }
+    }

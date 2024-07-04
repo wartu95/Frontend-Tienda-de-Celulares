@@ -56,7 +56,7 @@ submitGenerarTicket() {
     );
   } else {
     
-    console.error("Formulario inválido"); 
+    console.error("Formulario inválido");  
   }
 }
 

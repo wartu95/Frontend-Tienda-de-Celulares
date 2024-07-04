@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductoComponent } from './components/producto/producto.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { TecnicoComponent } from './components/tecnico/tecnico.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
     ProductoComponent,
     ClienteComponent,
     TicketComponent,
+    TecnicoComponent,
   ],
   imports: [
     BrowserModule,
