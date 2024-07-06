@@ -1,0 +1,14 @@
+
+.alerta-exito {
+    color: #0293dc;
+    background-color: #bdeef8d2;
+    border-color: #f0f4f6b9;
+    text-align: center;
+    
+  }
+  
+  .alerta-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }

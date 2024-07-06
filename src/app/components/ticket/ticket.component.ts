@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 })
 export class TicketComponent {
 httpService: APIHttpService;
+mensajeExito: boolean = false;
+mensajeError: boolean = false;
+mensaje: string = '';
 
 constructor( private http:APIHttpService, private formBuilder: FormBuilder, private route: Router){
   this.httpService = http;
@@ -40,27 +43,42 @@ submitGenerarTicket() {
         console.log("Ticket creado:", ticketResponse);
         this.ticketForm.reset();
         if(ticketResponse === 2){
-        alert('Su ticket ha sido ingresado correctamente, esta dentro de garantia');
+          this.mensaje = 'Su ticket ha sido ingresado correctamente, el equipo esta dentro de la garantia.';
+          this.mensajeExito = true;
         }else if(ticketResponse == 1){
-          alert('Imei fuera de garantia.')
+          this.mensaje = 'Su ticket no ha sido registrado, el equipo no se encuentra dentro del plazo de garantia.';
+          this.mensajeError = true;
+        }else if(ticketResponse == 3){
+          this.mensaje = 'Su ticket no ha sido registrado, Ya existe un ticket con el imei ingresado';
+          this.mensajeError = true;
         }else {
-          alert('Imei no existe')
+          console.log(ticketResponse)
+          this.mensaje = 'Su ticket no ha sido registrado, el imei no corresponde a esta tienda.';
+          this.mensajeError = true;
         }
 
       },
       (error) => {
         console.error("Error al crear ticket:", error);
         this.ticketForm.reset();
-        alert('Ingresaste un equipo ya consultado');
+        this.mensaje = '';
+        this.mensajeError = true;
+        
       }
     );
-  } else {
-    
-    console.error("Formulario inválido");  
+  } else { 
   }
 }
 
 Recargar(){
+  this.mensaje = '';
+  this.mensajeError = false;
   this.ticketForm.reset();
+}
+
+ocultarmensaje() {
+  this.mensaje = '';
+  this.mensajeError = false;
+  this.mensajeExito = false;
 }
 }

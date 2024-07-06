@@ -1,68 +1,210 @@
-<p>cambio works!</p>
 
-<h2>Evaluación de Equipo</h2>
-<form>
-    <div class="mb-3">
-      <label for="imeiInput" class="form-label">IMEI:</label>
-      <input type="text" class="form-control" id="imeiInput" [formControl]="imeiControl" placeholder="Ingrese el IMEI">
+<div (click)="cancelarmensaje()">
+<section class="intro">
+  <div class="container mb-5 text-center" style="margin-top: 60px">
+    <h1
+      style="font-size: 60px; font-family: lucida sans; color: rgb(42, 90, 181)"
+    >
+      Disponibilidad de equipos para cambio
+    </h1>
+  </div>
+  <div class="container text-center">
+    <button class="btn btn-outline-primary btn-lg" (click)="cancelarCambio()" >
+      <i class="bi bi-search" style="margin-right: 5px"></i>
+      Registar nuevo cambio
+    </button>
+  </div>
+</section>
+<br>
+<div class="container" *ngIf="mostrarFormulario" style="margin-top: 30px">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-5 ">
+      <div class="card" style="border-radius: 1rem">
+        <div class="row g-0">
+          <div class="col-md-4 d-none d-md-block">
+            <img
+              src=".\assets\img\cambioequipo-form.png"
+              alt="imagen de cambio de equipo"
+              class="img-fluid"
+              style="
+                border-top-left-radius: 1rem;
+                border-bottom-left-radius: 1rem;
+              "
+            />
+          </div>
+          <div class="col-8 d-flex align-items-center">
+            <div class="card-body py-5 px-4 p-md-5">
+              <form>
+                <h4 class="fw-bold mb-4" style="color: #6a9ae6">
+                  Registrar el cambio de equipo
+                </h4>
+
+                <div class="form-outline mb-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="imeiInput"
+                    [formControl]="imeiControl"
+                    placeholder="Ingrese el imei a remplazar"
+                  />
+                  <label class="form-label" for="imei">IMEI</label>
+                </div>
+
+                <div
+                  class="d-flex justify-content-end "
+                  style="margin-top: 5px"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-success" style="margin-right: 10px;"
+                    (click)="obtenerProducto()"
+                  >
+                    Buscar equipo
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    style="margin-right: 10px"
+                    (click)="limpiarformularios()"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+                <hr />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="obtenerProducto()">Buscar</button>
-  </form>
-  
-  <div *ngIf="mensajeError" class="alert alert-danger mt-3">{{ mensajeError }}</div>
-  
-  <!-- <table class="table mt-3" *ngIf="(productosEncontrados$ | async)?.length > 0">
-    <thead>
-      <tr>
-        <th>IMEI</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Precio</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of productosEncontrados$ | async">
-        <td>{{ producto.imei }}</td>
-        <td>{{ producto.brand }}</td>
-        <td>{{ producto.model }}</td>
-        <td>{{ producto.price }}</td>
-      </tr>
-    </tbody>
-  </table> -->
-
-  <div *ngIf="productosEncontrados$.value.length > 0; ">
-  <table class="table mt-3" >
-    <thead>
-      <tr>
-        <th>Seleccionar</th> 
-        <th>IMEI</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Precio</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of productosEncontrados$.value">
-        <td><input type="checkbox" [(ngModel)]="producto.seleccionado"></td> 
-        <td>{{ producto.imei }}</td>
-        <td>{{ producto.brand }}</td>
-        <td>{{ producto.model }}</td>
-        <td>{{ producto.price }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div *ngIf="!mostrarFormularioEspera">
-    <button type="button" class="btn btn-primary mt-3" (click)="realizarCambio()" [disabled]="!hayProductoSeleccionado()">Realizar Cambio</button>
-    <button type="button" class="btn btn-secondary mt-3" (click)="cancelarCambio()">Cancelar</button>
-    <button type="button" class="btn btn-warning mt-3" (click)="mostrarFormularioEspera = true" >Poner en Espera</button>
   </div>
 </div>
+<br />
 
+<div class="container" *ngIf="mostrarFormularioEspera">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-6 ">
+      <div class="card" style="border-radius: 1rem">
+        <div class="row g-0">
+          <div class="col-md-4 d-none d-md-block">
+            <img
+              src=".\assets\img\EsperarEquipo-form.png"
+              alt="Espera form"
+              class="img-fluid"
+              style="
+                border-top-left-radius: 1rem;
+                border-bottom-left-radius: 1rem;
+              "
+            />
+          </div>
+          <div class="col-8 d-flex align-items-center">
+            <div class="card-body py-5 px-4 p-md-5">
+              <form>
+                <h4 class="fw-bold mb-4" style="color: #5c8ad5">
+                  Registrar detalle de espera
+                </h4>
 
-  <div *ngIf="mostrarFormularioEspera">
-    <h3>Poner en Espera</h3>
-    <textarea [(ngModel)]="comentarioEspera" placeholder="Ingrese un comentario"></textarea>
-    <button type="button" class="btn btn-primary mt-3" (click)="ponerEnEspera()">Confirmar Espera</button>
-    <button type="button" class="btn btn-secondary mt-3" (click)="cancelarEspera()">Cancelar</button>
+                <div class="form-outline ">
+                  <label class="form-label" for="descripcion">Descripcion</label>
+                  <textarea
+                  [(ngModel)]="comentarioEspera" name="comentarioEspera"
+                  placeholder="Ingrese detalle de la espera de equipo"
+                  ></textarea>
+                  
+                </div>
+
+                <div
+                  class="d-flex justify-content-end "
+                  style="margin-top: 5px"
+                >
+                  <button
+                  type="button" class="btn btn-primary" (click)="ponerEnEspera()" (click)="mostrarFormulario=true" style="margin-right: 10px;"
+                  >
+                    Registrar Espera
+                  </button>
+                  <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="cancelarEspera()" style="margin-right: 10px;"
+                  >
+                    Cancelar Espera
+                  </button>
+                </div>
+                <hr />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+<br>
+
+<div
+    *ngIf="mensaje"
+    class="alerta"
+    [ngClass]="{ 'alerta-exito': mensajeExito, 'alerta-error': mensajeError }"
+  >
+    {{ mensaje }}
+  </div>
+
+<div class="container" *ngIf="productosEncontrados$.value.length > 0">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div
+        class="table-responsive bg-white"
+        data-mdb-perfect-scrollbar="true"
+        style="position: relative;"
+      >
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">IMEI</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Seleccionar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productosEncontrados$.value">
+              <td>{{ producto.imei }}</td>
+              <td>{{ producto.brand }}</td>
+              <td>{{ producto.model }}</td>
+              <td>{{ producto.price }}</td>
+              <td><input type="checkbox" [(ngModel)]="producto.seleccionado" /></td>
+            </tr>
+              <div class="container" style="justify-items: center;" *ngIf="!mostrarFormularioEspera">
+                  <button
+                  type="button"
+                  class="btn btn-primary "
+                  (click)="realizarCambio()"
+                  [disabled]="!hayProductoSeleccionado()" style=" margin-right: 5px;"
+                  >
+                    Registrar
+                  </button>
+                  <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="mostrarFormularioEspera = true" (click)="mostrarFormulario = false" [disabled]="habilitarbotonespera"  style="margin-right: 5px;"
+                  >
+                    Esperar
+                  </button>
+                  <button
+                  type="button"
+                  class="btn btn-secondary" style="margin-right: 5px;"
+                  (click)="cancelarCambio()"
+                  >
+                    Cancelar
+                  </button>
+              </div>
+              <br />
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+</div>

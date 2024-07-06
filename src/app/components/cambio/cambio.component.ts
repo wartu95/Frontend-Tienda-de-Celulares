@@ -13,64 +13,39 @@ export class CambioComponent {
 
   imeiControl: FormControl = this.fb.control('');
   productosEncontrados$: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>([]);
-  mensajeError: string | null = null;
+  mensajeExito: boolean = false;
+  mensajeError: boolean = false;
   mensaje: string =  ('')
   mostrarFormularioEspera: boolean = false;
   comentarioEspera: string = '';
   cambioRegistrado: boolean = false;
+  mostrarFormulario: boolean = false;
+  habilitarbotonespera: boolean = true;
 
 
   constructor(private fb: FormBuilder, private apiHttpService: APIHttpService) {
   }
-
-
-  // obtenerProducto() {
-  //   const imei = this.imeiControl.value;
-  //   this.apiHttpService.getBuscarProductoSimilar(imei).pipe(
-  //     switchMap((producto: Producto | null) => {
-  //       if(producto){
-  //         return of(producto);
-  //       }else{
-  //         return this.apiHttpService.getBuscarProductoSimilar(imei).pipe(
-  //         catchError(error => {
-  //           console.log('Error al obtener productos similares', error);
-  //           this.mensajeError = 'No se ';
-  //           return of(null);
-  //         })
-  //         );
-  //       }
-  //     }),
-  //     catchError(error => {
-  //       console.error('Error al obtener el producto: ' , error);
-  //       this.mensajeError = 'Error al obtener el producto';
-  //       return of(null);
-  //     })
-  //   ).subscribe((producto: Producto | null) => {
-  //     this.producto = producto;
-  //    console.log(producto)
-  //     if(!producto){
-  //       this.mensajeError = 'No se encontraron productos ni productos similares.';
-  //     }
-  //   }
-  // );
-  // }
   obtenerProducto() {
     const imei = this.imeiControl.value;
     
-    this.apiHttpService.getBuscarProductoSimilar(imei)
+    this.apiHttpService.getBuscarProducto(imei)
       .pipe(
         switchMap((productos: Producto[]) => {
           if (productos.length > 0) {
             console.log('mismo producto')
+            this.habilitarbotonespera = true;
             return of(productos);
+            
+
           } else {
             console.log('producto similar')
+            this.habilitarbotonespera = false;
             return this.apiHttpService.getBuscarProductoSimilar(imei);
           }
         }),
         catchError(error => {
           console.error('Error al obtener productos:', error);
-          this.mensajeError = 'Error al obtener productos.';
+          this.mensaje = 'Error al obtener productos.';
           return of([]); 
         })
       )
@@ -78,9 +53,10 @@ export class CambioComponent {
         (productos: Producto[]) => {
           this.productosEncontrados$.next(productos);
           if (productos.length === 0) {
-            this.mensajeError = 'No se encontraron productos.';
+            this.mensaje = 'No se encontraron productos.';
+            this.mensajeExito = true;
           } else {
-            this.mensajeError = null;
+            this.mensajeError = true;
           }
         }
       );
@@ -104,16 +80,19 @@ export class CambioComponent {
           () => {
             
             this.mensaje = "Cambio realizado correctamente";
+            this.mensajeExito = true;
             this.productosEncontrados$.next([]);
             this.imeiControl.reset();
             this.cambioRegistrado = true;
+
           },
           (error) => {
             console.error('Error al realizar el cambio:', error);
-            this.mensajeError = "Error al realizar el cambio";
+            this.mensaje = "Error al realizar el cambio";
+            this.mensajeError = false;
           }
         );
-    }else { this.mensajeError = 'Por favor, selecciona un producto nuevo para el cambio'}
+    }else { this.mensaje = 'Por favor, selecciona un producto nuevo para el cambio'}
   }
 
   ponerEnEspera() {
@@ -125,6 +104,7 @@ export class CambioComponent {
         .subscribe(
           () => {
             this.mensaje = "Producto puesto en espera correctamente";
+            this.mensajeExito = true;
             console.log(this.mensaje)
             this.productosEncontrados$.next([]); 
             this.imeiControl.reset(); 
@@ -133,7 +113,8 @@ export class CambioComponent {
           },
           (error) => {
             console.error('Error al poner en espera:', error);
-            this.mensajeError = "Error al poner en espera";
+            this.mensaje = "Error al poner en espera";
+            this.mensajeError = true;
           }
         );
   }
@@ -142,11 +123,22 @@ export class CambioComponent {
     this.imeiControl.reset();
     this.productosEncontrados$.next([]);
     this.mensajeError = null;
+    this.mostrarFormulario = !this.mostrarFormulario;
   }
 
+  limpiarformularios(){
+    this.imeiControl.reset();
+    this.mostrarFormulario = false;
+  }
   cancelarEspera() {
     this.mostrarFormularioEspera = false;
     this.comentarioEspera = '';
+  }
+  cancelarmensaje(){
+    this.mensaje= "";
+    this.mensajeError = false;
+    this.mensajeExito = false;
+  
   }
 }
 

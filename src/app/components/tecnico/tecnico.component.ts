@@ -42,7 +42,7 @@ export class TecnicoComponent {
           this.ocultarFormulario();
           this.botonesHabilitados = false;
         } else {
-          this.mensaje = 'Error al evaluar el equipo';
+          this.mensaje = 'No existe solicitud con ese imei';
           this.mensajeError = true;
         }
         this.imeiControl.reset();
@@ -73,7 +73,7 @@ export class TecnicoComponent {
         .aprobarSolicitud(this.solicitud.imeiInRevision)
         .subscribe(
           () => {
-            this.mensaje = 'El equipo cumple con los requisitos para el cambio';
+            this.mensaje = 'El equipo ha sido aprobado, cumple con los requisitos para el cambio';
             this.mensajeExito = true;
             this.obtenerSolicitudCambio(this.solicitud.imeiInRevision)
             this.botonesHabilitados = false;
@@ -97,10 +97,12 @@ export class TecnicoComponent {
         )
         .subscribe(
           () => {
-            this.mensaje = 'El Equipo fue rechazado';
+            this.mensaje = 'El Equipo no cumple con los requisitos de cambio.';
             this.mostrarFormularioRechazo = false;
-            this.mostrarFormulario = true;
+            this.mostrarFormulario = false;
             this.obtenerSolicitudCambio(this.solicitud.imeiInRevision);
+            this.botonesHabilitados = false;
+            this.mensajeExito = true;
           },
           (error) => {
             console.error('Error al rechazar la solicitud:', error);
@@ -122,5 +124,6 @@ export class TecnicoComponent {
   ocultarmensaje() {
     this.mensaje = '';
     this.mensajeError = false;
+    this.mensajeExito = false;
   }
 }
