@@ -41,4 +41,22 @@ export class APIHttpService {
         return this.http.put('http://localhost:8080/api/v1/documento-cambio/actualizar-rechazado',{imei, comment})
     }
 
+    getBuscarProducto(imei: string):Observable<Producto[]>{
+        const params = new HttpParams().set('imei',imei);
+        return this.http.get<Producto[]>('http://localhost:8080/api/v1/producto/buscar-reemplazo', {params});
+    }
+
+    getBuscarProductoSimilar(imei: string):Observable<Producto[]>{
+        const params = new HttpParams().set('imei',imei);
+        return this.http.get<Producto[]>('http://localhost:8080/api/v1/producto/buscar-reemplazo-similar', {params});
+    }
+
+    RealizarCambio(oldImei: string , newImei: string){
+        return this.http.put('http://localhost:8080/api/v1/documento-cambio/registra-cambio-equipo', {oldImei, newImei});
+    }
+
+    RegistrarProductoenEspera(imei:string, comment: string){
+        return this.http.put('http://localhost:8080/api/v1/documento-cambio/actualizar-espera', {imei, comment});
+    }
 }
+

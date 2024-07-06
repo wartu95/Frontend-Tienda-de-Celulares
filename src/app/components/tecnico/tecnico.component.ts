@@ -76,6 +76,7 @@ export class TecnicoComponent {
             this.mensaje = 'El equipo cumple con los requisitos para el cambio';
             this.mensajeExito = true;
             this.obtenerSolicitudCambio(this.solicitud.imeiInRevision)
+            this.botonesHabilitados = false;
             // this.solicitud = null;
           },
           (error) => {

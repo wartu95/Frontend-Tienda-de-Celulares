@@ -3,14 +3,16 @@ export class Producto {
     brand: string = '';
     model: string = '';
     price: number = 0;
-    state_product_id: number = 0;
+    seleccionado: boolean = false;
+    
 
-    constructor(imei: string, brand: string, model: string , price: number, state_product_id: number) {
+    constructor(imei: string, brand: string, model: string , price: number, seleccionado: boolean) {
         this.imei = imei;
         this.brand = brand;
         this.model = model;
         this.price = price;
-        this.state_product_id = state_product_id;
+        this.seleccionado = seleccionado;
+        
     }
 }
 

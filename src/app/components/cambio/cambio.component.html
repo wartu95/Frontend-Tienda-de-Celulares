@@ -1,0 +1,68 @@
+<p>cambio works!</p>
+
+<h2>Evaluación de Equipo</h2>
+<form>
+    <div class="mb-3">
+      <label for="imeiInput" class="form-label">IMEI:</label>
+      <input type="text" class="form-control" id="imeiInput" [formControl]="imeiControl" placeholder="Ingrese el IMEI">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="obtenerProducto()">Buscar</button>
+  </form>
+  
+  <div *ngIf="mensajeError" class="alert alert-danger mt-3">{{ mensajeError }}</div>
+  
+  <!-- <table class="table mt-3" *ngIf="(productosEncontrados$ | async)?.length > 0">
+    <thead>
+      <tr>
+        <th>IMEI</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productosEncontrados$ | async">
+        <td>{{ producto.imei }}</td>
+        <td>{{ producto.brand }}</td>
+        <td>{{ producto.model }}</td>
+        <td>{{ producto.price }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <div *ngIf="productosEncontrados$.value.length > 0; ">
+  <table class="table mt-3" >
+    <thead>
+      <tr>
+        <th>Seleccionar</th> 
+        <th>IMEI</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productosEncontrados$.value">
+        <td><input type="checkbox" [(ngModel)]="producto.seleccionado"></td> 
+        <td>{{ producto.imei }}</td>
+        <td>{{ producto.brand }}</td>
+        <td>{{ producto.model }}</td>
+        <td>{{ producto.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!mostrarFormularioEspera">
+    <button type="button" class="btn btn-primary mt-3" (click)="realizarCambio()" [disabled]="!hayProductoSeleccionado()">Realizar Cambio</button>
+    <button type="button" class="btn btn-secondary mt-3" (click)="cancelarCambio()">Cancelar</button>
+    <button type="button" class="btn btn-warning mt-3" (click)="mostrarFormularioEspera = true" >Poner en Espera</button>
+  </div>
+</div>
+
+
+  <div *ngIf="mostrarFormularioEspera">
+    <h3>Poner en Espera</h3>
+    <textarea [(ngModel)]="comentarioEspera" placeholder="Ingrese un comentario"></textarea>
+    <button type="button" class="btn btn-primary mt-3" (click)="ponerEnEspera()">Confirmar Espera</button>
+    <button type="button" class="btn btn-secondary mt-3" (click)="cancelarEspera()">Cancelar</button>
+  </div>

@@ -13,6 +13,7 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { TecnicoComponent } from './components/tecnico/tecnico.component';
+import { CambioComponent } from './components/cambio/cambio.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TecnicoComponent } from './components/tecnico/tecnico.component';
     ClienteComponent,
     TicketComponent,
     TecnicoComponent,
+    CambioComponent,
   ],
   imports: [
     BrowserModule,
